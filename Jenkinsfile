@@ -1,52 +1,19 @@
 pipeline {
-
     agent {
         node {
-            label 'master'
+            label 'Dev'
         }
     }
     stages {
-        
-        stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '*/Master']], 
-                    userRemoteConfigs: [[url: 'https://github.com/Midhunts1/Multibranch.git']]
-                ])
+        stage('checkout'){
+            steps{
+               git 'https://github.com/devopscube/multibranch-pipeline-demo.git'
             }
         }
-
-        stage(' Unit Testing') {
+        stage('Hello') {
             steps {
-                sh """
-                echo "Running Unit Tests"
-                """
+                echo 'My Dev Project'
             }
         }
-
-        stage('Code Analysis') {
-            steps {
-                sh """
-                echo "Running Code Analysis"
-                """
-            }
-        }
-
-        stage('Build Deploy Code') {
-            when {
-                branch 'develop'
-            }
-            steps {
-                sh """
-                echo "Building Artifact"
-                """
-
-                sh """
-                echo "Deploying Code"
-                """
-            }
-        }
-
-    }   
+    }
 }
