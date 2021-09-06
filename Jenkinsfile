@@ -1,7 +1,8 @@
 pipeline {
-    agent any
-    tools {
-        terraform 'Terraform'
+    agent {
+        node {
+            label 'master'
+        }
     }
     stages {
         stage('checkout'){
@@ -9,9 +10,9 @@ pipeline {
                git 'https://github.com/devopscube/multibranch-pipeline-demo.git'
             }
         }
-        stage('Terraform init'){
-            steps{
-                bat returnStatus: true, script: echo "Running Unit Tests"
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
             }
         }
     }
