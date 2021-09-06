@@ -1,2 +1,3 @@
 a = "Hello"
-print a
+b = "Hi"
+print a and b
